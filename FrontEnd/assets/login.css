@@ -1,0 +1,120 @@
+.login {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  height: 250px;
+  width: 400px;
+}
+.login p {
+  color: red;
+}
+h1 {
+  display: flex;
+  flex-direction: column;
+  font-family: "Syne";
+  font-weight: 800;
+  color: #b1663c;
+  margin-left: 230px;
+}
+h1 > span {
+  font-family: "Work Sans";
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+h2 {
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 30px;
+  color: #1d6154;
+  text-align: center;
+}
+.login h2 {
+  margin-bottom: 20px;
+  margin-right: 145px;
+}
+.login form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+}
+.login form input {
+  margin-bottom: 10px;
+  padding: 15px 5px;
+  box-shadow: 1px 1px 4px black;
+  border: none;
+}
+.login form .inputErrorLogin {
+  border: 1px solid red;
+}
+.login form button {
+  cursor: pointer;
+  width: 70%;
+  margin-left: 30px;
+  background-color: #1d6154;
+  color: white;
+  font-size: 1rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+}
+.login form button:hover {
+  color: #1d6154;
+  background-color: antiquewhite;
+  border: 1px solid #1d6154;
+}
+
+body {
+  line-height: 1;
+  background: #fffef8;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: antiquewhite;
+  height: 80px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  margin-right: 150px;
+}
+
+header nav a {
+  padding: 0 10px;
+  font-size: 1.2em;
+  color: black;
+  text-decoration: none;
+}
+header nav a:hover {
+  color: #b1663c;
+}
+
+section {
+  margin: 50px 0;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 0 auto;
+  margin-right: 120px;
+}
+
+/*# sourceMappingURL=style.css.map */

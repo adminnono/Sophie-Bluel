@@ -1,0 +1,229 @@
+.containerModals {
+  display: none;
+  justify-content: center; /* Centrer horizontalement */
+  align-items: center; /* Centrer verticalement */
+  position: fixed; /* Position fixe pour couvrir toute la fenêtre */
+  top: 0;
+  left: 0;
+  width: 100%; /* Pleine largeur */
+  height: 100%; /* Pleine hauteur */
+  background-color: rgba(
+    128,
+    128,
+    128,
+    0.347
+  ); /* Couleur de fond avec transparence */
+}
+
+.modalWork {
+  background-color: white;
+  width: 40%; /* Réduit la largeur */
+  height: 60%; /* Réduit la hauteur */
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  padding: 20px; /* Ajout d'un peu de padding pour l'intérieur */
+}
+
+.fa-xmark {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+#titremodal {
+  color: black;
+  font-weight: normal;
+}
+
+.bandeau-gris {
+  width: 100%; /* Pleine largeur de la modale */
+  height: 1mm; /* Hauteur du bandeau */
+  background-color: gray; /* Couleur du bandeau */
+  margin-top: 20px; /* Espace au-dessus du bandeau */
+}
+
+#btnmodale {
+  color: white;
+  background-color: #1d6154;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  margin-top: 10px; /* Ajout de marge au-dessus du bouton pour éloigner du bandeau */
+  cursor: pointer;
+}
+
+.workModal {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 colonnes */
+  gap: 10px; /* Espace entre les éléments */
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; /* Ajoute une scrollbar si le contenu déborde */
+  margin-top: 20px; /* Ajoute de la marge au-dessus de la galerie pour séparer du bandeau */
+}
+
+.workModal figure {
+  margin: 0; /* Retire les marges par défaut des figures */
+  position: relative; /* Position relative pour placer l'icône de manière absolue */
+}
+
+.workModal img {
+  width: 100%; /* L'image prend toute la largeur de son conteneur */
+  height: auto; /* Conserve le ratio de l'image */
+  border-radius: 5px; /* Optionnel : Ajoute des coins arrondis aux images */
+}
+
+.workModal span {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  border-radius: 50%;
+  padding: 5px; /* Optionnel : espace autour de l'icône */
+}
+
+.workModal span i {
+  color: white;
+  cursor: pointer;
+}
+
+/* Styles pour la nouvelle modale modalAddTravail */
+.modalAddTravail {
+  display: none;
+  justify-content: center; /* Centrer horizontalement */
+  align-items: center; /* Centrer verticalement */
+  background-color: white;
+  width: 40%; /* Réduit la largeur */
+  height: 60%; /* Réduit la hauteur */
+  border-radius: 5px;
+  position: relative;
+  padding: 20px; /* Ajout d'un peu de padding pour l'intérieur */
+  flex-direction: column;
+}
+
+.modalAddTravail .fa-arrow-left {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modalAddTravail .fa-xmark {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modalAddTravail h2 {
+  color: black;
+}
+
+.modalAddTravail form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80%;
+  width: 80%;
+  gap: 10px;
+}
+
+.modalAddTravail .containerFile {
+  background-color: #e8f1f6;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.modalAddTravail .containerFile label {
+  background-color: #cbd6dc;
+  color: #437490;
+  border-radius: 15px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.modalAddTravail .containerFile input {
+  display: none;
+}
+
+.modalAddTravail .containerFile .fa-image {
+  font-size: 3rem;
+  margin-top: 20px; /* Marge supérieure pour espacer l'icône du haut */
+}
+
+.modalAddTravail .containerFile img {
+  display: none;
+  max-width: 100%;
+  height: 100%;
+}
+
+.modalAddTravail .button {
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+.modalAddTravail .button:focus {
+  background-color: black;
+  color: white;
+}
+
+.modalAddTravail .valid {
+  background-color: #a7a7a7;
+  color: white;
+}
+
+.bandeau-gris-add {
+  width: 100%; /* Pleine largeur de la modale */
+  height: 1mm; /* Hauteur du bandeau */
+  background-color: gray; /* Couleur du bandeau */
+  margin-top: 20px; /* Espace au-dessus du bandeau */
+}
+
+.modalAddTravail .workModal {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 colonnes */
+  gap: 10px; /* Espace entre les éléments */
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; /* Ajoute une scrollbar si le contenu déborde */
+  margin-top: 20px; /* Ajoute de la marge au-dessus de la galerie pour séparer du bandeau */
+}
+
+.modalAddTravail .workModal figure {
+  margin: 0; /* Retire les marges par défaut des figures */
+  position: relative; /* Position relative pour placer l'icône de manière absolue */
+}
+
+.modalAddTravail .workModal img {
+  width: 100%; /* L'image prend toute la largeur de son conteneur */
+  height: auto; /* Conserve le ratio de l'image */
+  border-radius: 5px; /* Optionnel : Ajoute des coins arrondis aux images */
+}
+
+.modalAddTravail .workModal span {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  border-radius: 50%;
+  padding: 5px; /* Optionnel : espace autour de l'icône */
+}
+
+.modalAddTravail .workModal span i {
+  color: white;
+  cursor: pointer;
+}

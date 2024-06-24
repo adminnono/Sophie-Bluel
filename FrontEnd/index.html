@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Sophie Bluel - Architecte d'intérieur</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/login.css">
+  <link rel="stylesheet" href="assets/formulaireContact.css" />
+  <link rel="stylesheet" href="assets/containerModal.css" />
+    <link rel="stylesheet" href="assets/modaleAdd.css" />
+	<script src="../Backend/index.js" defer></script>
+</head>
+<body>
+    <header>
+      <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+      <nav>
+        <a href="#">projets</a>
+        <a href="#sectionContact">contact</a>
+        <a href="login.html" class="logout">login</a>
+        <img src="assets/icons/instagram.png" alt="Instagram" />
+      </nav>
+    </header>
+    <section id="introduction">
+      <figure>
+        <img src="assets/images/sophie-bluel.png" alt="" />
+      </figure>
+
+      <!-- Article Sophie Bluel -->
+      <article>
+        <h2>Designer d'espace</h2>
+        <p>
+          Je raconte votre histoire, je valorise vos idées. Je vous accompagne
+          de la conception à la livraison finale du chantier.
+        </p>
+        <p>
+          Chaque projet sera étudié en commun, de façon à mettre en valeur les
+          volumes, les matières et les couleurs dans le respect de l’esprit des
+          lieux et le choix adapté des matériaux. Le suivi du chantier sera
+          assuré dans le souci du détail, le respect du planning et du budget.
+        </p>
+        <p>
+          En cas de besoin, une équipe pluridisciplinaire peut-être constituée :
+          architecte DPLG, décorateur(trice)
+        </p>
+      </article>
+    </section>
+    <h2>Mes projets <a href="#" class="admin"></a></h2> 
+    <div class="filters">
+      <button id="0">Tous</button>
+    </div>
+    <main>
+    </main>
+
+    <!-- Formulaire de contact  -->
+    <div class="contactForm" id="sectionContact">
+      <h2>Contact</h2>
+      <p>Vous avez un projet ? Discutons-en !</p>
+      <form>
+        <label for="name">Nom</label>
+        <input type="text" id="name" name="name" required />
+    
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" required />
+    
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+    
+        <button type="submit" class="button">Envoyer</button>
+      </form>
+    </div>
+    <!-- Footer -->
+    <footer>
+      <h2>Réalisé par Arnaud Dujardin</h2>
+    </footer>
+
+    <!-- Création Modale Remove  -->
+    <div class="containerModals">
+      <div class="modalWork">
+        <span><i class="fa-solid fa-xmark"></i></span>
+        <h2 id="titremodal">Galerie Photo</h2>
+        <div class="workModal"></div>
+        <button id="btnmodale">Ajouter une photo</button>
+      </div>
+
+      <!-- Création Modale Add  -->
+      <div class="modalAddTravail">
+        <span><i class="fa-solid fa-arrow-left"></i></span>
+        <span><i class="fa-solid fa-xmark"></i></span>
+        <h2>Ajout photo</h2>
+        <form>
+          <div class="containerFile">
+            <span><i class="fa-regular fa-image" style="color: #b9c5cc;"></i></span>
+            <label for="file">+ Ajouter photo</label>
+            <input type="file" id="file" name="image" />
+            <img src="#" alt="Aperçu de l'image" />
+            <p>jpg, png: 4 mo max</p>
+          </div>
+          <label for="title">Titre</label>
+          <input type="text" id="title" name="title" />
+          <label for="category">Catégorie</label>
+          <select name="categoryId" id="category"></select>
+          <button class="button" disabled>Valider</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

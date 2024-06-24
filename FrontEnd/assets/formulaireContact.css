@@ -1,0 +1,70 @@
+/* Style Formulaire Contact */
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #fffef8;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.contactForm h2 {
+  color: #1d6154;
+  margin-bottom: 10px;
+}
+
+.contactForm p {
+  color: black;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.contactForm form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+}
+
+.contactForm label {
+  color: black;
+  font-weight: bold;
+}
+
+.contactForm input,
+.contactForm textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.contactForm input:focus,
+.contactForm textarea:focus {
+  outline: none;
+}
+
+.contactForm .button {
+  background-color: #1d6154;
+  color: white;
+  padding: 10px 60px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  align-self: center;
+  font-size: 1rem;
+}
+
+.contactForm .button:hover {
+  background-color: #365f77;
+}
+
+.contactForm textarea {
+  resize: none;
+}
