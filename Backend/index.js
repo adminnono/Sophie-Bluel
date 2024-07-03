@@ -1,21 +1,58 @@
-// @ts-nocheck
-// Vériifier que son Json server et bien en route
-
 // Variables
 const gallery = document.querySelector("main");
 const filters = document.querySelector(".filters");
-// Fonction qui retourne le tableau des works
-async function getWorks() {
-  // Ajouter await pour attendre avant d'enregistrer dans réponse
-  const response = await fetch("http://localhost:5678/api/works/");
+const admin = document.querySelector(".admin");
+const authLink = document.getElementById("auth-link"); // Modification ici
+const containerModals = document.querySelector(".containerModals");
+const xmark = document.querySelector(".containerModals .fa-xmark");
+const workModal = document.querySelector(".workModal");
+const banner = document.querySelector(".edit-mode-banner"); // Sélection de la bande noire
+const iconModifier = document.querySelector("#iconModifier");
+const loged = localStorage.getItem("loggedIn") === "true";
 
-  // Convertir la réponse au format json et ajout de await pour éviter la promesse
-  // A chaque fois que je vais appeler ma fonction, ça va retourner response.json
+// Activer le mode édition si l'utilisateur est connecté
+if (loged) {
+  admin.textContent = "modifier";
+  authLink.textContent = "logout";
+  authLink.href = "#"; // Lien de déconnexion
+  authLink.addEventListener("click", () => {
+    localStorage.removeItem("auth"); // Supprimer le token lors de la déconnexion
+    localStorage.removeItem("loggedIn"); // Supprimer l'état de connexion
+    window.location.reload(); // Recharger la page pour mettre à jour l'interface
+  });
+  banner.style.display = "flex"; // Afficher la bande noire
+  iconModifier.style.display = "flex"; // Afficher l'icone modifier
+} else {
+  admin.style.display = "none"; // Masquer l'élément admin si non connecté
+  authLink.textContent = "login";
+  authLink.href = "login.html"; // Rediriger vers la page de connexion
+  banner.style.display = "none"; // Masquer la bande noire
+  iconModifier.style.display = "none"; //Masquer l'icon modifier
+}
+
+// Affichage de la modale au click sur admin
+admin.addEventListener("click", () => {
+  if (loged) {
+    containerModals.style.display = "flex";
+  }
+});
+
+xmark.addEventListener("click", () => {
+  containerModals.style.display = "none";
+});
+
+containerModals.addEventListener("click", (e) => {
+  if (e.target.className == "containerModals") {
+    containerModals.style.display = "none";
+  }
+});
+
+// Afficher les works dans le DOM
+async function getWorks() {
+  const response = await fetch("http://localhost:5678/api/works/");
   return await response.json();
 }
-getWorks();
 
-// Afficher les Works dans le DOM //
 async function affichageWorks() {
   gallery.innerHTML = "";
   const arrayWorks = await getWorks();
@@ -23,8 +60,6 @@ async function affichageWorks() {
     createWorks(work);
   });
 }
-
-affichageWorks();
 
 function createWorks(work) {
   const figure = document.createElement("figure");
@@ -40,9 +75,7 @@ function createWorks(work) {
 
 affichageWorks();
 
-// *****************Affichage des boutons par catégorie ************************ //
-
-// Récupérer le tableau des catégories //
+// Récupérer le tableau des catégories
 async function getCategorys() {
   const response = await fetch("http://localhost:5678/api/categories/");
   return await response.json();
@@ -50,7 +83,6 @@ async function getCategorys() {
 
 async function displayCategorysButtons() {
   const categorys = await getCategorys();
-  console.log(categorys);
   categorys.forEach((category) => {
     const btn = document.createElement("button");
     btn.textContent = category.name;
@@ -61,69 +93,29 @@ async function displayCategorysButtons() {
 
 displayCategorysButtons();
 
-// Filtrer au click sur le bouton par catégorie //
-
+// Filtrer au click sur le bouton par catégorie
 async function filterCategory() {
   const works = await getWorks();
-  console.log(works);
   const buttons = document.querySelectorAll(".filters button");
   buttons.forEach((button) => {
     button.addEventListener("click", (e) => {
-      btnId = e.target.id;
+      const btnId = e.target.id;
       gallery.innerHTML = "";
       if (btnId !== "0") {
-        const worksTriCategory = works.filter((work) => {
-          return work.categoryId == btnId;
-        });
-        worksTriCategory.forEach((work) => {
-          createWorks(work);
-        });
+        const worksTriCategory = works.filter(
+          (work) => work.categoryId == btnId
+        );
+        worksTriCategory.forEach((work) => createWorks(work));
       } else {
         affichageWorks();
       }
-      console.log(btnId);
     });
   });
 }
 
 filterCategory();
 
-// Si l'utilisateur est connecté //
-
-const loged = window.sessionStorage.loged;
-const admin = document.querySelector(".admin");
-const logout = document.querySelector("header nav .logout");
-const containerModals = document.querySelector(".containerModals");
-const xmark = document.querySelector(".containerModals .fa-xmark");
-const workModal = document.querySelector(".workModal");
-
-if (loged == "true") {
-  admin.textContent = "modifier";
-  logout.textContent = "logout";
-  logout.addEventListener("click", () => {
-    window.sessionStorage.loged = false;
-  });
-}
-
-// Affichage de la modale au click sur admin //
-admin.addEventListener("click", () => {
-  console.log("admin");
-  containerModals.style.display = "flex";
-});
-
-xmark.addEventListener("click", () => {
-  console.log("xmark");
-  containerModals.style.display = "none";
-});
-
-containerModals.addEventListener("click", (e) => {
-  console.log(e.target.className);
-  if (e.target.className == "containerModals") {
-    containerModals.style.display = "none";
-  }
-});
-
-// Affichage du des travaux dans la galerie //
+// Affichage de la modale
 async function displayWorkModal() {
   workModal.innerHTML = "";
   const travaux = await getWorks();
@@ -132,20 +124,26 @@ async function displayWorkModal() {
     const img = document.createElement("img");
     const span = document.createElement("span");
     const trash = document.createElement("i");
+
     trash.classList.add("fa-solid", "fa-trash-can");
     trash.id = travail.id;
     img.src = travail.imageUrl;
+
     span.appendChild(trash);
+    span.classList.add("trash-container");
+
+    // Ajout d'une classe pour le style
+
     figure.appendChild(span);
     figure.appendChild(img);
     workModal.appendChild(figure);
   });
   deleteTravail();
 }
+
 displayWorkModal();
 
-// Suppression d'une image dans la modale //
-
+// Suppression d'une image dans la modale
 function deleteTravail() {
   const trashAll = document.querySelectorAll(".fa-trash-can");
   trashAll.forEach((trash) => {
@@ -153,7 +151,7 @@ function deleteTravail() {
       const id = trash.id;
       const init = {
         method: "DELETE",
-        headers: { "content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" },
       };
       fetch("http://localhost:5678/api/works/" + id, init)
         .then((response) => {
@@ -163,7 +161,6 @@ function deleteTravail() {
           return response.json();
         })
         .then((data) => {
-          console.log("Le delete a réussi, voici la data :", data);
           displayWorkModal();
           affichageWorks();
         });
@@ -171,7 +168,7 @@ function deleteTravail() {
   });
 }
 
-// Faire apparaitre une deuxième modale une fois le html fini //
+// Affichage de la deuxième modale
 const btnAddModal = document.querySelector(".modalWork button");
 const modalAddTravail = document.querySelector(".modalAddTravail");
 const modalWork = document.querySelector(".modalWork");
@@ -191,19 +188,18 @@ function displayAddModal() {
     containerModals.style.display = "none";
   });
 }
+
 displayAddModal();
 
-// Faire la pré-visualisation de l'image //
+// Pré-visualisation de l'image
 const previewImg = document.querySelector(".containerFile img");
 const inputFile = document.querySelector(".containerFile input");
 const labelFile = document.querySelector(".containerFile label");
 const inconFile = document.querySelector(".containerFile .fa-image");
 const pFile = document.querySelector(".containerFile p");
 
-// Ecouter les changements sur l'input file //
 inputFile.addEventListener("change", () => {
   const file = inputFile.files[0];
-  console.log(file);
   if (file) {
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -228,9 +224,16 @@ async function dispayCategoryModal() {
     select.appendChild(option);
   });
 }
+
 dispayCategoryModal();
 
-// Faire un Post : Ajouter une photo
+// Fonction pour obtenir l'autorisation
+function getAuthorization() {
+  const token = JSON.parse(localStorage.getItem("auth")).token;
+  return "Bearer " + token;
+}
+
+// Ajouter une photo avec autorisation
 const form = document.querySelector(".modalAddTravail form");
 const title = document.querySelector(".modalAddTravail #title");
 const category = document.querySelector(".modalAddTravail #category");
@@ -246,28 +249,28 @@ form.addEventListener("submit", async (e) => {
       name: category.options[category.selectedIndex].textContent,
     },
   };
-  fetch("http://localhost:5678/api/works/", {
+
+  const postWorkUrl = "http://localhost:5678/api/works";
+
+  const response = await fetch(postWorkUrl, {
     method: "POST",
-    body: JSON.stringify(formData),
     headers: {
       "content-Type": "application/json",
+      Authorization: getAuthorization(),
     },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      console.log("Voici le véhicule ajouté", data);
-      displayWorkModal();
-      affichageWorks();
-    });
+    body: JSON.stringify(formData),
+  });
+
+  const data = await response.json();
+  displayWorkModal();
+  affichageWorks();
 });
 
-// Fonction qui vérifie si tous les input sont remplis //
+// Vérifier si tous les inputs sont remplis
 function verifFormCompleted() {
   const buttonValidForm = document.querySelector(".modalAddTravail button");
   form.addEventListener("input", () => {
-    if (!title.value == "" && !category.value == "" && !inputFile.value == "") {
-      console.log("Tous les champs sont remplis");
+    if (title.value !== "" && category.value !== "" && inputFile.value !== "") {
       buttonValidForm.classList.add("valid");
     } else {
       buttonValidForm.classList.remove("valid");
@@ -275,4 +278,5 @@ function verifFormCompleted() {
     }
   });
 }
+
 verifFormCompleted();

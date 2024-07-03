@@ -1,42 +1,39 @@
-// Variables Globales pour le login //
+// Variables Globales pour le login
 const email = document.querySelector("form #email");
 const password = document.querySelector("form #password");
 const form = document.querySelector("form");
 const messageErreur = document.querySelector(".login p");
 
-// Fonction qui récupère les users //
-async function getUsers() {
-  const response = await fetch("http://localhost:5678/api/users");
-  return await response.json();
-}
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const userEmail = email.value;
+  const userPwd = password.value;
+  console.log(userEmail, userPwd);
 
-// Fonction de connexion //
-async function login() {
-  const users = await getUsers();
-  console.log(users);
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const userEmail = email.value;
-    const userPwd = password.value;
-    console.log(userEmail, userPwd);
-    users.forEach((user) => {
-      // Vérifications
-      if (
-        user.email == userEmail &&
-        user.password == userPwd &&
-        user.admin == true
-      ) {
-        // Si les conditions sont remplies, on fait ça //
-        window.sessionStorage.loged = true;
-        window.location.href = "../FrontEnd/index.html";
-      } else {
-        // Message d'erreur //
-        email.classList.add("inputErrorLogin");
-        password.classList.add("inputErrorLogin");
-        messageErreur.textContent =
-          "Votre email ou votre mot de passe est incorrect";
-      }
-    });
+  const response = await fetch("http://localhost:5678/api/users/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: userEmail,
+      password: userPwd,
+    }),
   });
-}
-login();
+
+  const data = await response.json();
+  console.log("Response Data:", data);
+
+  if (response.ok && data.token) {
+    // Si il y a un token, le stocker dans le localStorage
+    localStorage.setItem("auth", JSON.stringify({ token: data.token }));
+    localStorage.setItem("loggedIn", "true"); // Ajouter une clé loggedIn pour vérifier l'état de connexion
+
+    // Rediriger vers la page principale
+    window.location.href = "index.html";
+  } else {
+    // Afficher un message d'erreur
+    messageErreur.textContent =
+      "Erreur de connexion. Veuillez vérifier vos identifiants.";
+  }
+});
