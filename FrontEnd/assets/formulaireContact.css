@@ -15,12 +15,22 @@
 .contactForm h2 {
   color: #1d6154;
   margin-bottom: 10px;
+  font-family: "Syne";
+  font-style: normal;
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: 700;
 }
 
 .contactForm p {
   color: black;
   margin-bottom: 20px;
   text-align: center;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+  font-style: normal;
 }
 
 .contactForm form {
@@ -32,7 +42,9 @@
 
 .contactForm label {
   color: black;
-  font-weight: bold;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .contactForm input,
@@ -42,7 +54,7 @@
   border-radius: 5px;
   box-sizing: border-box;
   border: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  box-shadow: 1px 0px 4px rgba(0, 0, 0, 0.7);
 }
 
 .contactForm input:focus,
@@ -53,12 +65,14 @@
 .contactForm .button {
   background-color: #1d6154;
   color: white;
-  padding: 10px 60px;
+  padding: 15px 60px;
   border: none;
   border-radius: 25px;
   cursor: pointer;
   align-self: center;
-  font-size: 1rem;
+  font-weight: 700;
+  font-size: 17px;
+  font-family: "Syne";
 }
 
 .contactForm .button:hover {

@@ -1,5 +1,6 @@
 // Variables
 const gallery = document.querySelector("main");
+const filtersContainer = document.querySelector(".filters-container"); // Nouvelle sélection du conteneur de filtres
 const filters = document.querySelector(".filters");
 const admin = document.querySelector(".admin");
 const authLink = document.getElementById("auth-link"); // Modification ici
@@ -22,12 +23,14 @@ if (loged) {
   });
   banner.style.display = "flex"; // Afficher la bande noire
   iconModifier.style.display = "flex"; // Afficher l'icone modifier
+  filtersContainer.style.display = "none"; // Masquer les filtres si connecté
 } else {
   admin.style.display = "none"; // Masquer l'élément admin si non connecté
   authLink.textContent = "login";
   authLink.href = "login.html"; // Rediriger vers la page de connexion
   banner.style.display = "none"; // Masquer la bande noire
   iconModifier.style.display = "none"; //Masquer l'icon modifier
+  filtersContainer.style.display = "block"; // Afficher les filtres si non connecté
 }
 
 // Affichage de la modale au click sur admin

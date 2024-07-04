@@ -1,33 +1,42 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-	<meta charset="UTF-8">
-	<title>Sophie Bluel - Architecte d'intérieur</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<meta name="description" content="">
-	<link rel="stylesheet" href="assets/style.css">
-  <link rel="stylesheet" href="assets/login.css">
-  <link rel="stylesheet" href="assets/formulaireContact.css" />
-  <link rel="stylesheet" href="assets/containerModal.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sophie Bluel - Architecte d'intérieur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="assets/login.css" />
+    <link rel="stylesheet" href="assets/formulaireContact.css" />
+    <link rel="stylesheet" href="assets/containerModal.css" />
     <link rel="stylesheet" href="assets/modaleAdd.css" />
-	<script src="../Backend/index.js" defer></script>
-</head>
-<body>
-  <div class="edit-mode-banner">
-    <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
-    <span>Mode édition</span>
-  </div>
+    <script src="../Backend/index.js" defer></script>
+  </head>
+  <body>
+    <div class="edit-mode-banner">
+      <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+      <span>Mode édition</span>
+    </div>
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
         <a href="#">projets</a>
         <a href="#sectionContact">contact</a>
         <a href="login.html" class="logout" id="auth-link">login</a>
-        <img src="assets/icons/instagram.png" alt="Instagram" />
+        <img src="assets/icons/instagram.png" id="instagram" alt="Instagram" />
       </nav>
       <script src="path/to/your/index.js" defer></script>
     </header>
@@ -55,15 +64,21 @@
         </p>
       </article>
     </section>
-    <h2 id="margin">Mes projets 
-    <i class="fa-solid fa-pen-to-square" aria-hidden="true" id="iconModifier"></i>
-    <a href="#" class="admin"></a>
-    </h2> 
-    <div class="filters">
-      <button id="0">Tous</button>
+    <h2 id="margin">
+      Mes projets
+      <i
+        class="fa-solid fa-pen-to-square"
+        aria-hidden="true"
+        id="iconModifier"
+      ></i>
+      <a href="#" class="admin"></a>
+    </h2>
+    <div class="filters-container">
+      <div class="filters">
+        <button id="0">Tous</button>
+      </div>
     </div>
-    <main>
-    </main>
+    <main></main>
 
     <!-- Formulaire de contact  -->
     <div class="contactForm" id="sectionContact">
@@ -72,19 +87,19 @@
       <form>
         <label for="name">Nom</label>
         <input type="text" id="name" name="name" required />
-    
+
         <label for="email">E-mail</label>
         <input type="email" id="email" name="email" required />
-    
+
         <label for="message">Message</label>
         <textarea id="message" name="message" rows="5" required></textarea>
-    
+
         <button type="submit" class="button">Envoyer</button>
       </form>
     </div>
     <!-- Footer -->
     <footer>
-      <h2>Réalisé par Arnaud Dujardin</h2>
+      <a href="#" id="legal">Mentions légales</a>
     </footer>
 
     <!-- Création Modale Remove  -->
@@ -103,7 +118,9 @@
         <h2>Ajout photo</h2>
         <form>
           <div class="containerFile">
-            <span><i class="fa-regular fa-image" style="color: #b9c5cc;"></i></span>
+            <span
+              ><i class="fa-regular fa-image" style="color: #b9c5cc"></i
+            ></span>
             <label for="file">+ Ajouter photo</label>
             <input type="file" id="file" name="image" />
             <img src="#" alt="Aperçu de l'image" />
