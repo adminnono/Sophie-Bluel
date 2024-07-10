@@ -10,6 +10,7 @@ const workModal = document.querySelector(".workModal");
 const banner = document.querySelector(".edit-mode-banner"); // Sélection de la bande noire
 const iconModifier = document.querySelector("#iconModifier");
 const loged = localStorage.getItem("loggedIn") === "true";
+console.log(loged);
 
 // Activer le mode édition si l'utilisateur est connecté
 if (loged) {
@@ -154,18 +155,26 @@ function deleteTravail() {
       const id = trash.id;
       const init = {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "content-Type": "application/json",
+          Authorization: getAuthorization(),
+        },
       };
       fetch("http://localhost:5678/api/works/" + id, init)
         .then((response) => {
           if (!response.ok) {
             console.log("Le delete n'a pas marché !");
           }
-          return response.json();
+
+          return response.text();
         })
-        .then((data) => {
+        .then((text) => {
+          console.log("spp ok");
           displayWorkModal();
           affichageWorks();
+        })
+        .catch((error) => {
+          console.error("Erreur:", error);
         });
     });
   });

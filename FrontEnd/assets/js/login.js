@@ -28,10 +28,11 @@ form.addEventListener("submit", async (e) => {
     // Si il y a un token, le stocker dans le localStorage
     localStorage.setItem("auth", JSON.stringify({ token: data.token }));
     localStorage.setItem("loggedIn", "true"); // Ajouter une clé loggedIn pour vérifier l'état de connexion
-
+    alert("ok");
     // Rediriger vers la page principale
     window.location.href = "index.html";
   } else {
+    alert("pas ok");
     // Afficher un message d'erreur
     messageErreur.textContent =
       "Erreur de connexion. Veuillez vérifier vos identifiants.";
