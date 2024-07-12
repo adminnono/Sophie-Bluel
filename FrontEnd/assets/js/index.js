@@ -1,37 +1,36 @@
 // Variables
 const gallery = document.querySelector("main");
-const filtersContainer = document.querySelector(".filters-container"); // Nouvelle sélection du conteneur de filtres
+const filtersContainer = document.querySelector(".filters-container");
 const filters = document.querySelector(".filters");
 const admin = document.querySelector(".admin");
-const authLink = document.getElementById("auth-link"); // Modification ici
+const authLink = document.getElementById("auth-link");
 const containerModals = document.querySelector(".containerModals");
 const xmark = document.querySelector(".containerModals .fa-xmark");
 const workModal = document.querySelector(".workModal");
-const banner = document.querySelector(".edit-mode-banner"); // Sélection de la bande noire
+const banner = document.querySelector(".edit-mode-banner");
 const iconModifier = document.querySelector("#iconModifier");
 const loged = localStorage.getItem("loggedIn") === "true";
-console.log(loged);
 
 // Activer le mode édition si l'utilisateur est connecté
 if (loged) {
   admin.textContent = "modifier";
   authLink.textContent = "logout";
-  authLink.href = "#"; // Lien de déconnexion
+  authLink.href = "#";
   authLink.addEventListener("click", () => {
-    localStorage.removeItem("auth"); // Supprimer le token lors de la déconnexion
-    localStorage.removeItem("loggedIn"); // Supprimer l'état de connexion
-    window.location.reload(); // Recharger la page pour mettre à jour l'interface
+    localStorage.removeItem("auth");
+    localStorage.removeItem("loggedIn");
+    window.location.reload();
   });
-  banner.style.display = "flex"; // Afficher la bande noire
-  iconModifier.style.display = "flex"; // Afficher l'icone modifier
-  filtersContainer.style.display = "none"; // Masquer les filtres si connecté
+  banner.style.display = "flex";
+  iconModifier.style.display = "flex";
+  filtersContainer.style.display = "none";
 } else {
-  admin.style.display = "none"; // Masquer l'élément admin si non connecté
+  admin.style.display = "none";
   authLink.textContent = "login";
-  authLink.href = "login.html"; // Rediriger vers la page de connexion
-  banner.style.display = "none"; // Masquer la bande noire
-  iconModifier.style.display = "none"; //Masquer l'icon modifier
-  filtersContainer.style.display = "block"; // Afficher les filtres si non connecté
+  authLink.href = "login.html";
+  banner.style.display = "none";
+  iconModifier.style.display = "none";
+  filtersContainer.style.display = "block";
 }
 
 // Affichage de la modale au click sur admin
@@ -135,8 +134,6 @@ async function displayWorkModal() {
 
     span.appendChild(trash);
     span.classList.add("trash-container");
-
-    // Ajout d'une classe pour le style
 
     figure.appendChild(span);
     figure.appendChild(img);
@@ -249,33 +246,39 @@ function getAuthorization() {
 const form = document.querySelector(".modalAddTravail form");
 const title = document.querySelector(".modalAddTravail #title");
 const category = document.querySelector(".modalAddTravail #category");
+const fileInput = document.querySelector("#file");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const formData = {
-    title: title.value,
-    categoryId: category.value,
-    imageUrl: previewImg.src,
-    category: {
-      id: category.value,
-      name: category.options[category.selectedIndex].textContent,
-    },
-  };
+
+  const formData = new FormData();
+  formData.append("title", title.value);
+  formData.append("category", category.value);
+  formData.append("image", fileInput.files[0]);
 
   const postWorkUrl = "http://localhost:5678/api/works";
 
-  const response = await fetch(postWorkUrl, {
-    method: "POST",
-    headers: {
-      "content-Type": "application/json",
-      Authorization: getAuthorization(),
-    },
-    body: JSON.stringify(formData),
-  });
+  try {
+    const response = await fetch(postWorkUrl, {
+      method: "POST",
+      headers: {
+        Authorization: getAuthorization(),
+      },
+      body: formData,
+    });
 
-  const data = await response.json();
-  displayWorkModal();
-  affichageWorks();
+    if (response.ok) {
+      console.log("Travail ajouté avec succès");
+      displayWorkModal();
+      affichageWorks();
+      modalAddTravail.style.display = "none";
+      modalWork.style.display = "flex";
+    } else {
+      console.error("Erreur lors de l'ajout du travail :", response.statusText);
+    }
+  } catch (error) {
+    console.error("Erreur :", error);
+  }
 });
 
 // Vérifier si tous les inputs sont remplis
@@ -284,6 +287,7 @@ function verifFormCompleted() {
   form.addEventListener("input", () => {
     if (title.value !== "" && category.value !== "" && inputFile.value !== "") {
       buttonValidForm.classList.add("valid");
+      buttonValidForm.disabled = false;
     } else {
       buttonValidForm.classList.remove("valid");
       buttonValidForm.disabled = true;
